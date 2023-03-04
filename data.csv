@@ -3,3 +3,4 @@ ID,Nombre,Precio,Cantidad,Tipo
 002,Refresco,12,10,Bebida
 003,Papas,10,10,Alimento
 004,Agua,12,10,Bebida
+005,Donas,15,12,Alimento
