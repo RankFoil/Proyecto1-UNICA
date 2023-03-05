@@ -4,3 +4,5 @@ ID,Nombre,Precio,Cantidad,Tipo
 003,Papas,10,10,Alimento
 004,Agua,12,10,Bebida
 005,Donas,15,12,Alimento
+456,Agua,14,10,Bebida
+547,Paleta,5,20,Alimento

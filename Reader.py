@@ -2,6 +2,12 @@ import csv
 import curses
 
 class Producto:
+    def __init__(self: object, newId: int, nombre: str , precio: int, cantidad: int, tipo: str) -> object:
+        self.newId = newId
+        self.nombre = nombre
+        self.precio = precio
+        self.cantidad = cantidad
+        self.tipo = tipo
     @staticmethod
     def cantidad(producto:str,data:list)->None:
         """Determina el producto que se entrega y reduce su cantidad disponible en 1"""
@@ -28,31 +34,12 @@ class Producto:
                 if producto[0]==ID:
                     return producto[2]
     @staticmethod
-    def agregar()->None:
+    def agregar(lista)->None:
         """Agrega un producto al archivo data.csv"""
-        try:
-            id=int(input("Ingrese su ID (3 dígitos): "))
-            newID=str(id)
-            if len(str(id))>3:
-                print("No se pudo agregar el producto")
-                return
-            elif len(str(id))<3:
-                newID=str(id).zfill(3)
-            print('Agregando producto...')
-            Nombre=input("Nombre del producto: ")
-            Precio=int(input("Precio del producto: "))
-            Cantidad=int(input("Cantidad de productos disponibles: "))
-            Tipo=input("Tipo de producto: ")
-            Nombre=Nombre.title()
-            Tipo=Tipo.title()
-            print('Producto agregado\n\n')
-        except ValueError:
-            print("No se pudo agregar el producto")
-            return
-        list=[newID,Nombre,Precio,Cantidad,Tipo]
+        
         with open("data.csv","a",newline="") as f:
             w=csv.writer(f)
-            w.writerow(list)
+            w.writerow(lista)
         
 class Maquina:
     @staticmethod

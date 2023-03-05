@@ -12,6 +12,8 @@ def main():
         if opc == 1:
             Usuario.verProductos()
         elif opc == 2:
+            
+
             Producto.agregar()
 
         else:
