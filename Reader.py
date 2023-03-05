@@ -43,17 +43,9 @@ class Producto:
         
 class Maquina:
     @staticmethod
-    def darProducto(producto:str)->None:
+    def darProducto(producto:str,dinero:int)->None:
         """Le entrega el producto al usuario tras haber hecho las validaciones pertinentes,
             aumenta el presupuesto de la máquina en base al precio del producto vendido"""
-        flag=True
-        while(flag):
-            try:
-                dinero=int(input("Ingrese su dinero (int): "))
-            except ValueError:
-                continue
-            if dinero>0:
-                flag=False
         lista=Producto.productos()
         for i in lista:
             if producto in i:
@@ -98,7 +90,7 @@ class Maquina:
     def verPresupuesto()->None:
         #Debe ir al principio del menú principal
         """Revisa que la máquina tenga presupuesto, de no tenerlo, imprime una advertencia"""
-        with open("dinero.txt","w+") as f:
+        with open("dinero.txt","r") as f:
             presupuesto=f.readline()
             if int(presupuesto)==0:
                 print("La máquina no puede devolver cambio")
@@ -130,8 +122,16 @@ class Maquina:
 class Usuario:
     def comprar()->None:
         """Le permite al usuario adquirir un producto"""
+        flag=True
+        while(flag):
+            try:
+                dinero=int(input("Ingrese su dinero (int): "))
+            except ValueError:
+                continue
+            if dinero>0:
+                flag=False
         id=Maquina.readID()
-        Maquina.darProducto(id)
+        Maquina.darProducto(id,dinero)
     def verProductos()->None:
         """Imprime en la terminal los productos en data.csv"""
         with open("data.csv","r") as f:
@@ -147,7 +147,9 @@ class Usuario:
                 if producto[4]==tipo:
                     print("ID: "+producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
 
-
+class IDAlreadyExists_Exception(Exception):
+    def __init__(self) -> None:
+        print("La ID ya existe")
 
 # Usuario.verTipos("alimento")
 # Usuario.comprar()
