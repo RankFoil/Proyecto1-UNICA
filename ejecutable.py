@@ -20,8 +20,10 @@ def main():
 
         if opc == 1:
             Usuario.verProductos()
+            """Regresa la lista de productos que se almacenan en el archivo data.csv"""
         elif opc==2:
             Usuario.comprar()
+            """Permite realizar la compra que desea el usuario"""
         elif opc==3:
             try:
                 opc2=int(input("Ingrese el tipo de producto a buscar\n1. Bebida\n2. Alimento\n"))
@@ -35,6 +37,7 @@ def main():
             except ValueError:
                 pass
             Usuario.verTipos(tipo)
+            """Regresa los productos de acuerdo al tipo de productos solicitado que se almacenan en el archivo data.csv"""
 
         elif opc == 4:
             try:
@@ -76,6 +79,7 @@ def main():
             new_product = Producto(newID, Nombre, Precio, Cantidad, Tipo)
             lista=[new_product.newId, new_product.nombre, new_product.precio, new_product.cantidad, new_product.tipo ]
             Producto.agregar(lista)
+            """Instancia los productos que se agregan a la máquina, los productos se almacenan en una nueva linea del archivo data.csv"""
             
         elif opc==5:
             break

@@ -3,6 +3,7 @@ import curses
 
 class Producto:
     def __init__(self: object, newId: int, nombre: str , precio: int, cantidad: int, tipo: str) -> object:
+        """Definición del método constructor para le creación de objetos (productos)"""
         self.newId = newId
         self.nombre = nombre
         self.precio = precio
@@ -36,7 +37,6 @@ class Producto:
     @staticmethod
     def agregar(lista)->None:
         """Agrega un producto al archivo data.csv"""
-        
         with open("data.csv","a",newline="") as f:
             w=csv.writer(f)
             w.writerow(lista)
