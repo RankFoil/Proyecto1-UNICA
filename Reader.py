@@ -149,9 +149,9 @@ class Usuario:
 
 
 
-Usuario.verTipos("alimento")
-Usuario.comprar()
-Usuario.verProductos()
+# Usuario.verTipos("alimento")
+# Usuario.comprar()
+# Usuario.verProductos()
 
 #Maquina.darProducto("001")
 #print(Producto.productos())
