@@ -10,12 +10,7 @@ def main():
 '''))
 
         if opc == 1:
-            print(Producto.productos())
-
-            producto_comprado = input('Ingresa ID de tu producto: ')
-            Producto.costo(producto_comprado)
-            
-            
+            Usuario.verProductos()
         elif opc == 2:
             Producto.agregar()
 

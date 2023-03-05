@@ -26,7 +26,7 @@ class Producto:
             reader=csv.reader(f)
             for producto in reader:
                 if producto[0]==ID:
-                    return print(f'{producto[1]} -> ${producto[2]} ')
+                    return producto[2]
     @staticmethod
     def agregar()->None:
         """Agrega un producto al archivo data.csv"""
@@ -140,6 +140,31 @@ class Maquina:
                         return False
             
 
+class Usuario:
+    def comprar()->None:
+        """Le permite al usuario adquirir un producto"""
+        id=Maquina.readID()
+        Maquina.darProducto(id)
+    def verProductos()->None:
+        """Imprime en la terminal los productos en data.csv"""
+        with open("data.csv","r") as f:
+            reader=csv.reader(f)
+            for producto in reader:
+                print("ID: "+producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
+    def verTipos(tipo:str)->None:
+        """Imprime en la terminal los productos que coincidan con el tipo dado"""
+        tipo=tipo.title()
+        with open("data.csv","r") as f:
+            reader=csv.reader(f)
+            for producto in reader:
+                if producto[4]==tipo:
+                    print("ID: "+producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
+
+
+
+Usuario.verTipos("alimento")
+Usuario.comprar()
+Usuario.verProductos()
 
 #Maquina.darProducto("001")
 #print(Producto.productos())
