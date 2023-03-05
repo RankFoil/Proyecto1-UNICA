@@ -1,6 +1,6 @@
 import csv
 import curses
- 
+
 class Producto:
     @staticmethod
     def cantidad(producto:str,data:list)->None:
@@ -26,7 +26,7 @@ class Producto:
             reader=csv.reader(f)
             for producto in reader:
                 if producto[0]==ID:
-                    return producto[2]
+                    return print(f'{producto[1]} -> ${producto[2]} ')
     @staticmethod
     def agregar()->None:
         """Agrega un producto al archivo data.csv"""
@@ -38,12 +38,14 @@ class Producto:
                 return
             elif len(str(id))<3:
                 newID=str(id).zfill(3)
-            Nombre=input("Ingrese el nombre del producto: ")
-            Precio=int(input("Ingrese el precio del producto: "))
-            Cantidad=int(input("Ingrese la cantidad de productos disponibles: "))
-            Tipo=input("Ingrese el tipo de producto: ")
+            print('Agregando producto...')
+            Nombre=input("Nombre del producto: ")
+            Precio=int(input("Precio del producto: "))
+            Cantidad=int(input("Cantidad de productos disponibles: "))
+            Tipo=input("Tipo de producto: ")
             Nombre=Nombre.title()
             Tipo=Tipo.title()
+            print('Producto agregado\n\n')
         except ValueError:
             print("No se pudo agregar el producto")
             return
@@ -139,6 +141,7 @@ class Maquina:
             
 
 
-Maquina.darProducto("001")
+#Maquina.darProducto("001")
+#print(Producto.productos())
 # print(Producto.costo("001"))
 #Producto.agregar()
