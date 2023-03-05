@@ -139,11 +139,11 @@ class Usuario:
         with open("data.csv","r") as f:
             reader=csv.reader(f)
             for producto in reader:
-                print("ID: "+producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
+                print(producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
     @staticmethod
     def verTipos(tipo:str)->None:
         """Imprime en la terminal los productos que coincidan con el tipo dado"""
-        tipo=tipo.title()
+        #tipo=tipo.title()
         with open("data.csv","r") as f:
             reader=csv.reader(f)
             for producto in reader:

@@ -1,6 +1,7 @@
 from Reader import *
 
 def main():
+    '''Funcion encargada de mostrar un menu para realizar las opciones que se pueden ejecutar'''
     opc=0
     while(opc!=5):
         Maquina.verPresupuesto()
@@ -8,18 +9,34 @@ def main():
         try:
             opc = int(input('''
 1. Enlistar productos
-2. Agregar producto
-3. Comprar producto
-4. Enlistar productos por tipo
+2. Comprar producto
+3. Enlistar productos por tipo
+4. Agregar producto
 5. Salir
 '''))
         except ValueError:
             opc=0
+            tipo = ''
 
         if opc == 1:
             Usuario.verProductos()
+        elif opc==2:
+            Usuario.comprar()
+        elif opc==3:
+            try:
+                opc2=int(input("Ingrese el tipo de producto a buscar\n1. Bebida\n2. Alimento\n"))
+                if opc2 == 1:
+                    tipo = 'Bebida'
+                elif opc2 == 2:
+                    tipo = 'Alimento'
+                else:
+                    print('Opcion no valida')
+                #tipo = tipo.title()
+            except ValueError:
+                pass
+            Usuario.verTipos(tipo)
 
-        elif opc == 2:
+        elif opc == 4:
             try:
                 print('Agregando producto...')
                 id=int(input("Ingrese su ID (3 dígitos): "))
@@ -37,9 +54,19 @@ def main():
                 Nombre=input("Nombre del producto: ")
                 Precio=int(input("Precio del producto: "))
                 Cantidad=int(input("Cantidad de productos disponibles: "))
-                Tipo=input("Tipo de producto: ")
+                try:
+                    Tipostr=int(input("Tipo de producto(1. Alimento/ 2. Bebida): "))
+                    if Tipostr == 2:
+                        Tipo = 'Bebida'
+                    elif Tipostr == 1:
+                        Tipo = 'Alimento'
+                    else:
+                        print('Opcion no valida')
+                    #tipo = tipo.title()
+                except ValueError:
+                    pass
                 Nombre=Nombre.title()
-                Tipo=Tipo.title()
+                #Tipo=Tipo.title()
                 print('-----Producto agregado----\n\n')
             except ValueError:
                 print("No se pudo agregar el producto")
@@ -49,15 +76,9 @@ def main():
             new_product = Producto(newID, Nombre, Precio, Cantidad, Tipo)
             lista=[new_product.newId, new_product.nombre, new_product.precio, new_product.cantidad, new_product.tipo ]
             Producto.agregar(lista)
-        
-        elif opc==3:
-            Usuario.comprar()
-        elif opc==4:
-            tipo=input("Ingrese el tipo de producto a buscar: ")
-            Usuario.verTipos(tipo)
+            
         elif opc==5:
             break
-
         else:
             print('Opcion no válida')
 
