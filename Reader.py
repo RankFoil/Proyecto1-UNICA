@@ -60,7 +60,7 @@ class Maquina:
                             f.write(str(presupuesto))
                         print("$"+str(abs(cambio))+" regresados")
                     else:
-                        print("No hay "+ i[1]+ " disponible(s)")
+                        print("No hay "+ i[1]+ " disponible(s) *Le regresa sus "+str(dinero)+" pesitos*")
                 else:
                     return
                         
