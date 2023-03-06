@@ -4,7 +4,6 @@ def main():
     '''Funcion encargada de mostrar un menu para realizar las opciones que se pueden ejecutar'''
     opc=0
     while(opc!=5):
-        Maquina.verPresupuesto()
         print('---------MENU-------')
         try:
             opc = int(input('''
@@ -33,9 +32,9 @@ def main():
                     tipo = 'Alimento'
                 else:
                     print('Opcion no valida')
-                #tipo = tipo.title()
+                    continue
             except ValueError:
-                pass
+                continue
             Usuario.verTipos(tipo)
             """Regresa los productos de acuerdo al tipo de productos solicitado que se almacenan en el archivo data.csv"""
 
@@ -49,11 +48,10 @@ def main():
                     return
                 elif len(str(id))<3:
                     newID=str(id).zfill(3)
-                with open("data.csv", "r") as f:
-                    reader=csv.reader(f)
-                    for IDS in reader:
-                        if newID==IDS[0]:
-                            raise IDAlreadyExists_Exception()
+                reader=Producto.productos()
+                for IDS in reader:
+                    if newID==IDS[0]:
+                        raise IDAlreadyExists_Exception()
                 Nombre=input("Nombre del producto: ")
                 Precio=int(input("Precio del producto: "))
                 Cantidad=int(input("Cantidad de productos disponibles: "))
@@ -65,11 +63,13 @@ def main():
                         Tipo = 'Alimento'
                     else:
                         print('Opcion no valida')
-                    #tipo = tipo.title()
+                        print("No se pudo agregar el producto")
+                        continue
                 except ValueError:
-                    pass
+                    print('Opcion no valida')
+                    print("No se pudo agregar el producto")
+                    continue
                 Nombre=Nombre.title()
-                #Tipo=Tipo.title()
                 print('-----Producto agregado----\n\n')
             except ValueError:
                 print("No se pudo agregar el producto")

@@ -79,21 +79,12 @@ class Maquina:
                 raise 
             finally: 
                 curses.endwin()
-            with open("data.csv") as f:
-                lista=csv.reader(f)
-                for i in lista:
-                    if id in i:
-                        return id
-                    else:
-                        id.format()
-    @staticmethod
-    def verPresupuesto()->None:
-        #Debe ir al principio del menú principal
-        """Revisa que la máquina tenga presupuesto, de no tenerlo, imprime una advertencia"""
-        with open("dinero.txt","r") as f:
-            presupuesto=f.readline()
-            if int(presupuesto)==0:
-                print("La máquina no puede devolver cambio")
+            lista=Producto.productos()
+            for i in lista:
+                if id in i:
+                    return id
+                else:
+                    id.format()
     @staticmethod
     def calcularCambio(dinero:int,ID:str)->int:
         """Calcula el cambio que se dará, de no haber fondos suficientes, regresará el presupuesto disponible"""
@@ -108,15 +99,11 @@ class Maquina:
     @staticmethod
     def evaluarDinero(dinero:int,ID:str)->bool:
         """Revisa que el dinero ingresado sea suficiente para adquirir un producto"""
-        with open("data.csv","r") as f:
-            reader=csv.reader(f)
-            for producto in reader:
-                if producto[0]==ID:
-                    if dinero>=int(producto[2]):
-                        return True
-                    else:
-                        print("Fondos insuficientes *Le regresa sus "+str(dinero)+ " pesitos*" )
-                        return False
+        if dinero>=int(Producto.costo(ID)):
+            return True
+        else:
+            print("Fondos insuficientes *Le regresa sus "+str(dinero)+ " pesitos*" )
+            return False
             
 
 class Usuario:
@@ -135,30 +122,19 @@ class Usuario:
         Maquina.darProducto(id,dinero)
     @staticmethod
     def verProductos()->None:
-        """Imprime en la terminal los productos en data.csv"""
-        with open("data.csv","r") as f:
-            reader=csv.reader(f)
-            for producto in reader:
-                print(producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
+        """Imprime en la terminal los productos de la máquina"""
+        lista=Producto.productos()
+        for producto in lista:
+            print(producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
     @staticmethod
     def verTipos(tipo:str)->None:
         """Imprime en la terminal los productos que coincidan con el tipo dado"""
-        #tipo=tipo.title()
-        with open("data.csv","r") as f:
-            reader=csv.reader(f)
-            for producto in reader:
-                if producto[4]==tipo:
-                    print("ID: "+producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
+        lista=Producto.productos()
+        for producto in lista:
+            if producto[4]==tipo:
+                print("ID: "+producto[0]+" "+producto[1]+" ("+producto[4]+")"+" Precio: $"+producto[2]+" "+producto[3]+" diponible(s)")
 
 class IDAlreadyExists_Exception(Exception):
     def __init__(self) -> None:
+        """Excepción que se lanza en caso de que se intente agregar una ID ya existente"""
         print("La ID ya existe")
-
-# Usuario.verTipos("alimento")
-# Usuario.comprar()
-# Usuario.verProductos()
-
-#Maquina.darProducto("001")
-#print(Producto.productos())
-# print(Producto.costo("001"))
-#Producto.agregar()
